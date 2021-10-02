@@ -1,0 +1,9 @@
+.side-bar {
+    font-size: .9rem;
+}
+.side-bar > div {
+    padding: 10px 12px;
+}
+.width-400 {
+    width: 400px;
+}

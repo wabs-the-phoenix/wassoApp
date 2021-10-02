@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/slick-1.8.1/slick-1.8.1/slick/slick-theme.css">
+    <link rel="stylesheet" href="/slick-1.8.1/slick-1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="/fontawsome/css/all.min.css">
+    <link rel="stylesheet" href="/mainStyle.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="full height">
+           
+        <div class="ui  stackable inverted teal menu">
+        <div class="ui container">
+            <a class="active item">
+            <i class="home icon"></i> Acceuil
+            </a>
+            <a class="item">
+            <i class="grid layout icon"></i> Equipes
+            </a>
+            <a class="item">
+            <i class="grid layout icon"></i> Projets
+            </a>
+            <a class="item">
+            <i class="mail icon"></i> Messages
+            </a>
+            <div class="ui simple dropdown item">
+            More
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                <a class="item"><i class="globe icon"></i> Choose Language</a>
+                <a class="item"><i class="settings icon"></i> Account Settings</a>
+            </div>
+            </div>
+            <div class="right item">
+            <div class="ui input"><input type="text" placeholder="Search..."></div>
+            </div>
+            <div class="item" id="userInfo">
+
+            </div>
+            <div class="item" id="dateTime">
+
+            </div>
+        </div>
+        </div>
+        <div class="ui container">
+            <div class="stripe">
+            <div class="ui stackable four column grid">
+                <div class="column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="ui header orange">
+                                Projets en cours
+                            </div>
+                            <div class="ui statistic">
+                                <div class="value">
+                                0
+                                </div>
+                                <div class="label">
+                                Projets
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <button class="ui blue button">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="ui header green">
+                                Projets Validé
+                            </div>
+                            <div class="ui statistic">
+                                <div class="value">
+                                0
+                                </div>
+                                <div class="label">
+                                Projets validé
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <button class="ui blue button">Voir plus</button>
+                        </div>
+                    </div></div>
+                <div class="column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="ui header red">
+                                Projets Annulés
+                            </div>
+                            <div class="ui statistic">
+                                <div class="value">
+                                0
+                                </div>
+                                <div class="label">
+                                Projets annulés
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <button class="ui blue button">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="ui header blue">
+                                Team
+                            </div>
+                            <div class="ui statistic">
+                                <div class="value">
+                                0
+                                </div>
+                                <div class="label">
+                                Equipes
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <button class="ui blue button">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="ui hidden divider"></div>
+            <h2>Liste des utilisateurs</h2>
+            <table class="ui compact celled definition table">
+                <thead class="full-width">
+                    <tr>
+                    <th></th>
+                    <th>Nom</th>
+                    <th>Date de création</th>
+                    <th>E-mail</th>
+                    <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody id="userList">
+                    
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                    <th></th>
+                    <th colspan="4" id="userListFoot">
+                        <button id="addUser" class="ui small primary labeled icon button">
+                        <i class="user icon"></i> Ajouter
+                        </button>
+                        <button id="deleteUser" class="ui small red labeled icon button">
+                            <i class="trash icon"></i>
+                        Supprimer
+                        </button>
+                    </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="ui modal addUserForm">
+                <i class="close icon"></i>
+                <div class="header">
+                    Ajouter utilisateur
+                </div>
+                <div class="ui padded basic segment">
+                    <form class="ui form" id="newUserForm">
+                        <div class="field">
+                            <label>Nom</label>
+                            <input type="text" name="userName" id="userName">
+                        </div>
+                        <div class="field">
+                            <label>E-mail</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="field">
+                            <label>Mot de passe</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+                        <div class="field">
+                            <label>Confirmer Mot de passe</label>
+                            <input type="password" name="confirmedPass" id="confirmedPass">
+                        </div>
+                        <div class="field">
+                            <label>Role</label>
+                            <select name="roleId" id="roleId" class="ui select">
+                                <option value="4">Employe</option>
+                                <option value="3">Chef d'equipe</option>
+                                <option value="2">Directeur</option>
+                                <option value="1">Administrateur</option>
+                            </select>
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="ui actions">
+                    <button class="ui blue labeled icon button" id="confirmUserInfo">
+                        <i class="plus icon"></i>
+                        Ajouter
+                    </button>
+                    <button class="ui red labeled icon button" id="cancelUserInfo">
+                        <i class="close icon"></i>
+                        Annuler
+                    </button>
+                </div>
+            </div>
+            <div class="ui hidden divider"></div>
+            <h2>Liste des Equipes</h2>
+            <table class="ui compact celled definition table">
+                <thead class="full-width">
+                    <tr>
+                    <th></th>
+                    <th>Nom</th>
+                    <th>Responsable/th>
+                    <th>Date de Creation</th>
+                    </tr>
+                </thead>
+                <tbody id="teamList">
+
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <div class="ui small primary labeled icon button">
+                        <i class="user icon"></i> Add User
+                        </div>
+                        <button class="ui small red labeled icon button">
+                            <i class="trash icon"></i>
+                        Supprimer
+                        </button>
+                    </th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            <div class="ui hidden divider"></div>
+            <div class="ui modal alert">
+                <i class="close icon"></i>
+                <div class="ui very padded basic segment">
+                    <div class="ui  message" id="alertModal">
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="ui center aligned inverted teal segment">
+            <div class="ui small header">Designed By Patrice Wasso</div>
+        </div>
+    </div>
+
+    <script src="/jquery-3.6.0.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
+    <script src="/anime/lib/anime.min.js"></script>
+    <script src="/moment.js"></script>
+    <script src="/slick-1.8.1/slick-1.8.1/slick/slick.min.js"></script>
+    <script src="/userValidation.js"></script>
+    <script src="/admin.js"></script>
+</body>
+</html>

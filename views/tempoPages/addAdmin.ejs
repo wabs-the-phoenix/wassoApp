@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/api/users/register/" method="POST">
+        <input type="text" name="userName" id="userName">
+        <input type="email" name="email" id="email">
+        <input type="password" name="password" id="password">
+        <select name="roleId" id="roleId">
+            <option value="1">
+                Admin
+            </option>
+            <option value="2">Directeur</option>
+            <option value="3">Chef de Projet</option>
+            <option value="4">Employe</option>
+        </select>
+        <input type="submit" value="ajouter">
+    </form>
+</body>
+</html>

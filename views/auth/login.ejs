@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/slick-1.8.1/slick-1.8.1/slick/slick-theme.css">
+    <link rel="stylesheet" href="/slick-1.8.1/slick-1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="/mainStyle.css">
+    <title>Login</title>
+</head>
+<body class="ui segment blue inverted">
+
+    <div class="ui container">
+        <div class="ui segment blue inverted">
+            <div class="ui two column very relaxed stackable grid blue inverted">
+                <div class="ui segment blue inverted column ">
+                    <div class="ui meduim header">Pax Planner</div>
+                    <h1 class="ui huge header">Planifiez et faites la suivi des projets de l'entreprise</h1>
+                </div>
+               
+                <div class="column ui segment white">
+                    <h3 class="ui large header">Connexion</h3>
+                        <div class="label">
+                            Connecter vous maintenant et decouvrer toute la puissance
+                        </div>
+                    <form action="/api/users/register/" method="POST" class="ui form relative" id="loginForm">
+                        
+                        <div class="field">
+                            <label for="">Votre E-Mail</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="field">
+                            <label for="">Votre Mot de Passe</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+                        <button class="ui left labeled icon primary button">
+                            <i class="left edit icon"></i>Se Connecter
+                        </button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="/jquery-3.6.0.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
+    <script src="/anime/lib/anime.min.js"></script>
+    <script src="/slick-1.8.1/slick-1.8.1/slick/slick.min.js"></script>
+    <script src="/app.js"></script>
+</body>
+</html>
