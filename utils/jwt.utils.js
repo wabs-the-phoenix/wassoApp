@@ -26,7 +26,6 @@ module.exports = {
                     userId = jwtToken.userId;
                 }
             } catch (error) {
-                console.log(error);
             }
             return userId;
         }

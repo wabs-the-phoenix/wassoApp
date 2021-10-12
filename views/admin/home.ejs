@@ -135,6 +135,7 @@
                 
             </div>
             <div class="ui hidden divider"></div>
+            <!-- gérer les utilsateurs-->
             <h2>Liste des utilisateurs</h2>
             <table class="ui compact celled definition table">
                 <thead class="full-width">
@@ -146,6 +147,7 @@
                     <th>Role</th>
                     </tr>
                 </thead>
+                <!--liste des utilisateurs-->
                 <tbody id="userList">
                     
                 </tbody>
@@ -164,6 +166,7 @@
                     </tr>
                 </tfoot>
             </table>
+            <!-- boite modal pour ajouter des utilisateurs-->
             <div class="ui modal addUserForm">
                 <i class="close icon"></i>
                 <div class="header">
@@ -217,7 +220,6 @@
                     <tr>
                     <th></th>
                     <th>Nom</th>
-                    <th>Responsable/th>
                     <th>Date de Creation</th>
                     </tr>
                 </thead>
@@ -227,10 +229,10 @@
                 <tfoot class="full-width">
                     <tr>
                     <th></th>
-                    <th colspan="4">
-                        <div class="ui small primary labeled icon button">
-                        <i class="user icon"></i> Add User
-                        </div>
+                    <th colspan="4" id="teamListFoot">
+                        <button class="ui small primary labeled icon button" id="addTeamBtn">
+                            <i class="plus icon"></i> Ajouter
+                        </button>
                         <button class="ui small red labeled icon button">
                             <i class="trash icon"></i>
                         Supprimer
@@ -239,6 +241,35 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="ui modal addTeamForm">
+                <i class="close icon"></i>
+                <div class="header">
+                    Ajouter utilisateur
+                </div>
+                <div class="ui padded basic segment">
+                    <form class="ui form" id="newTeamForm">
+                        <div class="field">
+                            <label>Nom de l'équipe</label>
+                            <input type="text" name="teamName" id="teamName">
+                        </div>
+                        <div class="field">
+                            <label>Chef d'équipe</label>
+                            <input type="text" name="teamRespo" id="teamRespo">
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="ui actions">
+                    <button class="ui blue labeled icon button" id="confirmTeamInfo">
+                        <i class="plus icon"></i>
+                        Ajouter
+                    </button>
+                    <button class="ui red labeled icon button" id="cancelTeamInfo">
+                        <i class="close icon"></i>
+                        Annuler
+                    </button>
+                </div>
+            </div>
             </div>
             <div class="ui hidden divider"></div>
             <div class="ui modal alert">

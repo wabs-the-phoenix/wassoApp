@@ -55,13 +55,12 @@
         }
        
     }
-    const displayPagination = (number) => {
+    const displayPagination = (number, userListFoot) => {
         let pagination = document.createElement(`div`);
         pagination.classList.add(`ui`)
         pagination.classList.add(`floated`)
         pagination.classList.add(`right`)
         pagination.classList.add(`menu`)
-        const userListFoot = document.querySelector(`#userListFoot`);
         let oldPage = userListFoot.querySelector(`.ui.menu`);
         if(oldPage) {
             userListFoot.removeChild(oldPage);
@@ -91,7 +90,8 @@
                 if(xhr.status == 200) {
                     let res = xhr.responseText;
                     users = JSON.parse(res);
-                    let extremums = displayPagination(users.length)
+                     const userListFoot = document.querySelector(`#userListFoot`);
+                    let extremums = displayPagination(users.length, userListFoot)
                     userList.innerHTML = "";
                     let lenght = users.length - min;
                     if(lenght > 10) {
@@ -120,13 +120,103 @@
         xhr.send();
     }
     const showTeams = (min) => {
-        
+        const xr = new XMLHttpRequest();
+        xr.open('GET', '/api/teams/')
+        xr.onreadystatechange = () => {
+          if(xr.readyState == 4) {
+                  if(xr.status == 200) {
+                        let res = xr.responseText;
+                        teams = JSON.parse(res);
+                        teamList.innerHTML = '';
+                        if(teams.length == 0) {
+                            teamList.innerHTML = `<tr><td colspan=5><h4>Aucun Utilisateur trouvé</h4></td></tr>`;
+                            return;
+                        }
+                       const teamListFoot =  document.querySelector(`#teamListFoot`);
+                        let extremums = displayPagination(teams.length, teamListFoot)
+                        teamList.innerHTML = "";
+                        let lenght = teams.length - min;
+                        if(lenght > 10) {
+                            lenght = 10;
+                        }
+                        for (let i = min; i < lenght; i++) {
+                            const element = teams[i];
+                            let row = document.createElement('tr');
+                            moment.locale('fr');
+                            let date = moment(element.createdAt).format(`DD MM YYYY  hh:mm:ss`);
+                            
+                            row.innerHTML = `<td class="collapsing">
+                            <div class="ui fitted slider checkbox">
+                            <input type="checkbox" id="${element.id}" name="${element.id}"> <label></label>
+                            </div>
+                             </td><td>${element.name}</td><td>${date}</td><td>${element.createdAt}</td>`;
+                            
+                            userList.appendChild(row);
+                        }
+                   }
+                   else if(xr.status == 400) {
+                       location = '/';
+    
+                   }
+                   else {
+                    teamList.innerHTML = `<tr><td colspan=5><h4>Aucun Utilisateur trouvé</h4></td></tr>`
+                    }
+          }
+           
+        }
+        xr.send();
+    }
+    const findSelectedId = (div) => {
+        const allCheckboxes = div.querySelectorAll('input[type="checkbox"]');
+        let choosen = [];
+        for (let i = 0; i < allCheckboxes.length; i++) {
+            const element = allCheckboxes[i];
+            if (element.checked) {
+                choosen.push(element);
+            }
+        }
+        return choosen;
     }
     //#endregion
 
     //#region : events listenner
     const addUser = (e) => {
         $('.ui.modal.addUserForm').modal('show');
+    }
+    const deleteUser = (e) => {
+        let choosen = findSelectedId(userList);
+        if(choosen.lenght > 0) {
+            let jsonChoosen = JSON.stringify(choosen);
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', `/api/users/delete`);
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState == 4) {
+                    if(xhr.status == 200) {
+                        const alertModal = document.querySelector(`#alertModal`);
+                        alertModal.innerHTML = `<p>Utilisateur supprimer avec succes</p>`
+                        if(alertModal.classList.contains(`error`)) {
+                            alertModal.classList.remove(`error`);
+                        }
+                        else if(alertModal.classList.contains(`success`)){
+
+                        }
+                        else {
+                            alertModal.classList.add(`success`);
+                        }
+                            toggleModal(`addUserForm`);
+                            toggleModal(`alert`)
+                            showUsers(0);
+                    }
+                }
+            }
+            xhr.setRequestHeader('authorization', sessionStorage.userStorage)
+            xhr.send(jsonChoosen);
+        }
+        
+    }
+    const addTeam = (e) => {
+        console.log($('.ui.modal.addTeamForm'))
+        $('.ui.modal.addTeamForm').modal('show');
     }
 
     const newUser = (e) => {
@@ -177,6 +267,9 @@
             xhr.send(`email=${email.value}&password=${userPassword.value}&userName=${userName.value}&roleId=${roleId.value}`);
         }
     }
+    const newTeam = (e) => {
+
+    }
     const cancel = (e) => {
 
     }
@@ -186,7 +279,9 @@
     let users;
     let teams;
     const userList = document.querySelector('#userList');
+    const teamList = document.querySelector("#teamList");
     const addUserBtn = document.querySelector(`#addUser`);
+    const deleteUserBtn = document.querySelector('#deleteUser');
     const confirmUserInfoBtn = document.querySelector(`#confirmUserInfo`);
     const cancelUserInfoBtn = document.querySelector(`#cancelUserInfo`);
     const newUserForm = document.querySelector(`#newUserForm`);
@@ -194,14 +289,18 @@
     const userName = document.querySelector(`#userName`);
     const userPassword = document.querySelector(`#password`);
     const confirmedPass = document.querySelector(`#confirmedPass`);
+    const confirmTeamInfo = document.querySelector('#confirmTeamInfo');
     const roleId = document.querySelector(`#roleId`);
     //#region : recuperation des tous les utilisateurs
     const xhr = new XMLHttpRequest();
     showUsers(0);
+    showTeams(0);
     //#endregion
     //#region : add event listener
     addUserBtn.addEventListener('click', addUser);
+    deleteUserBtn.addEventListener('click', deleteUser);
     confirmUserInfoBtn.addEventListener(`click`, newUser);
+    confirmTeamInfo.addEventListener('click', addTeam);
     //#endregion
 
 })()

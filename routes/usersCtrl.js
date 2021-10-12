@@ -159,5 +159,20 @@ module.exports = {
         .catch((error) => {
 
         })
+    },
+    deleteUsers: (req, res) => {
+        let headerAuth = req.headers['authorization'];
+        let userId = jwt.getUserId(headerAuth);
+        console.log(userId);
+        if(userId < 1) {
+            return res.status(400, `Probleme d'authentification`);
+        }
+        models.User.findAll({ include: models.Role })
+        .then((user) => {
+            console.log(user);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 }

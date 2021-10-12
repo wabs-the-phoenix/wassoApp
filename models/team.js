@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Team.init({
-    idTeam: DataTypes.INTEGER,
     name: DataTypes.STRING
   }, {
     sequelize,
